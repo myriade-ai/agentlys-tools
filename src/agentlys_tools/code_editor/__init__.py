@@ -7,7 +7,7 @@ except ImportError:
     def CodeEditor(*args, **kwargs):
         raise ImportError(
             "CodeEditor requires extra dependencies. "
-            "Install with: pip install agentlys-tools[editor]"
+            "Install with: pip install agentlys-tools[code-editor]"
         )
 
     __all__ = ["CodeEditor"]

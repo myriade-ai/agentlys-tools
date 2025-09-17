@@ -7,13 +7,13 @@ Repository of tools for [agentlys](https://github.com/myriade-ai/agentlys).
 Install with all tools:
 
 ```bash
-pip install agentlys-tools
+pip install 'agentlys-tools[all]'
 ```
 
-Install with specific tools:
+Install with only specific tools:
 
 ```bash
-pip install agentlys-tools[editor]
+pip install 'agentlys-tools[code-editor,terminal]'
 ```
 
 ## Available Tools
@@ -25,7 +25,8 @@ pip install agentlys-tools[editor]
 
 ```python
 from agentlys import Agentlys
-from agentlys_tools import CodeEditor, Terminal
+from agentlys_tools.code_editor import CodeEditor
+from agentlys_tools.terminal import Terminal
 
 agent = Agentlys()
 code_editor = CodeEditor()
