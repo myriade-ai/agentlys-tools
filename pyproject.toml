@@ -1,7 +1,7 @@
 [project]
 name = "agentlys_tools"
 description = "Shared tools for Agentlys"
-version = "0.1.0"
+version = "0.2.0"
 authors = [
     {name = "Benjamin Derville", email = "benjamin@myriade.ai"}
 ]
