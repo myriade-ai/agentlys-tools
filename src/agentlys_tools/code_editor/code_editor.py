@@ -1,5 +1,7 @@
 import logging
 import os
+import shutil
+from pathlib import Path
 
 from PIL import Image
 
@@ -95,6 +97,31 @@ class CodeEditor:
         """Delete a file."""
         abs_path = os.path.join(self.directory, path)
         os.remove(abs_path)
+
+    def create_folder(self, folder_path: str):
+        """
+        Create a folder if it does not exist.
+
+        Args:
+            folder_path: Relative path to the folder
+        """
+        repo_path = Path(self.directory)
+        folder_path = Path(folder_path)
+        if (repo_path / folder_path).exists():
+            return "Folder already exists"
+        os.makedirs(repo_path / folder_path)
+        return "Folder created"
+
+    def delete_folder(self, folder_path: str):
+        """
+        Delete a folder (and all its contents) if it exists.
+        """
+        repo_path = Path(self.directory)
+        folder_path = Path(folder_path)
+        if not (repo_path / folder_path).exists():
+            return "Folder does not exist"
+        shutil.rmtree(repo_path / folder_path)
+        return "Folder deleted"
 
     def str_replace(self, path: str, old_string: str, new_string: str) -> str:
         """Replace all occurrences of 'old_string' with 'new_string' in the file.
