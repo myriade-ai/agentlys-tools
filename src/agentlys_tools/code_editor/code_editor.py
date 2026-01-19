@@ -20,18 +20,11 @@ class CodeEditor:
         self.open_files = set()
 
     def __llm__(self):
-        """Currently: display the directory of the code editor."""
+        """Display the directory and list of open files (use read_file to view content)."""
         context = "Directory:\n" + self.display_directory()
         context += "\nOpen files:\n"
         for path in self.open_files:
-            try:
-                context += f"> {path}\n" + self.read_file(path)
-                context += "\n==========\n"
-            except Exception as e:
-                context += f"> {path}\n"
-                context += "File is not a text file\n"
-                context += "\n==========\n"
-                logger.error(f"Error reading file {path}: {e}")
+            context += f"- {path}\n"
         return context
 
     def read_file(self, path: str, start_line: int = 1, end_line: int = None):
@@ -50,7 +43,9 @@ class CodeEditor:
         if abs_path not in self.open_files:
             self.open_files.add(abs_path)
 
-        if path.lower().endswith((".png", ".jpg", ".jpeg")):
+        if path.lower().endswith(
+            (".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp", ".tiff", ".tif", ".ico")
+        ):
             return Image.open(abs_path)
 
         with open(abs_path, "r") as f:
